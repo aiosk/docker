@@ -1,0 +1,10 @@
+---
+services:
+  plex:
+    build: .
+    network_mode: "host"
+    volumes:
+      - /c/Users/Administrator:/mnt/media
+    restart: unless-stopped
+    command: [bash, ./plex.sh]
+version: "2"
