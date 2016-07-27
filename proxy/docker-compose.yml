@@ -1,0 +1,32 @@
+---
+services:
+  squid:
+    build:
+      context: ./squid
+    volumes:
+      - /mnt/caches:/mnt/caches:rw
+    network_mode: "host"
+    restart: unless-stopped
+    command: [bash, ./squid.sh]
+  privoxy:
+    build:
+      context: ./privoxy
+    depends_on:
+      - squid
+    network_mode: "host"
+    environment: 
+      - BLOCK=BLOCK=('.mopub.com' '.mobfox.com' '.flurry.com' '.amazon-adsystem.com' '.crashlytics.com' '.googlesyndication.com' '.adcolony.com' '.gvt1.com' '.newrelic.com' '.mixpanel.com' '.googleadservices.com' '.safebrowsing-cache.google.com' '.play.googleapis.com' '.edgecastcdn.net' '/CustomerInfo/' '.effectivemeasure.net' 'metrics.brightcove.com' '.google.com/loc/m/api' 'graph.facebook.com' 'events.redditmedia.com' 'out.reddit.com' 'reddit.com/static/pixel.png' 'pixel.redditmedia.com')
+    restart: unless-stopped
+    command: [bash, ./privoxy.sh]
+  proxhttps:
+    build:
+      context: ./proxhttps
+    volumes:
+      - /mnt/caches:/mnt/certs:ro
+    depends_on:
+      - privoxy
+      - squid
+    network_mode: "host"
+    restart: unless-stopped
+    command: [bash, ./proxhttps.sh]
+version: "2"

@@ -1,0 +1,122 @@
+FROM debian
+
+WORKDIR /root
+
+RUN	set -ex \
+	&& groupadd -r squid && useradd -r -g squid squid \
+	&& buildDeps='' \
+	&& runDeps='squid3 bash sed' \
+	&& apt-get update && apt-get install -y --no-install-recommends --no-install-suggests $runDeps $buildDeps \
+	&& rm -rf /var/lib/apt/lists/* \
+
+	&& apt-get purge -y --auto-remove $buildDeps \
+	&& apt-get clean -y && apt-get autoclean -y && apt-get autoremove -y \
+	&& rm -rf /var/cache/debconf/*-old /usr/share/doc/* /usr/share/man/* /usr/share/groff/* /usr/share/info/* /usr/share/locale/* /tmp/* /var/tmp/*
+
+COPY squid.conf .
+#COPY init.sh ./squid.sh
+#COPY lib.sh ./lib.sh
+
+debian
+Squid Cache: Version 3.4.8
+configure options:  
+--build=x86_64-linux-gnu \
+--prefix=/usr \
+--includedir=${prefix}/include \
+--mandir=${prefix}/share/man \
+--infodir=${prefix}/share/info \
+--sysconfdir=/etc \
+--localstatedir=/var \
+--libexecdir=${prefix}/lib/squid3 \
+--srcdir=. \
+--disable-maintainer-mode \
+--disable-dependency-tracking \
+--disable-silent-rules \
+--datadir=/usr/share/squid3 \
+--sysconfdir=/etc/squid3 \
+--mandir=/usr/share/man \
+--enable-inline \
+--disable-arch-native \
+--enable-async-io=8 \
+--enable-storeio=ufs,aufs,diskd,rock \
+--enable-removal-policies=lru,heap \
+--enable-delay-pools \
+--enable-cache-digests \
+--enable-icap-client \
+--enable-follow-x-forwarded-for \
+--enable-auth-basic=DB,fake,getpwnam,LDAP,MSNT,MSNT-multi-domain,NCSA,NIS,PAM,POP3,RADIUS,SASL,SMB \
+--enable-auth-digest=file,LDAP \
+--enable-auth-negotiate=kerberos,wrapper \
+--enable-auth-ntlm=fake,smb_lm \
+--enable-external-acl-helpers=file_userip,kerberos_ldap_group,LDAP_group,session,SQL_session,unix_group,wbinfo_group \
+--enable-url-rewrite-helpers=fae \
+--enable-eui \
+--enable-esi \
+--enable-icmp \
+--enable-zph-qos \
+--enable-ecap \
+--disable-translation \
+--with-swapdir=/var/spool/squid3 \
+--with-logdir=/var/log/squid3 \
+--with-pidfile=/var/run/squid3.pid \
+--with-filedescriptors=65536 \
+--with-large-files \
+--with-default-user=proxy \
+--enable-build-info= linux \
+--enable-linux-netfilter \
+--enable-ssl \
+--enable-ssl-crtd
+'build_alias=x86_64-linux-gnu \
+
+'CFLAGS=-g-O2-fPIE -fstack-protector-strong -Wformat -Werror=format-security -Wall'
+'LDFLAGS=-fPIE -pie -Wl,-z,relro -Wl,-z,now'
+'CPPFLAGS=-D_FORTIFY_SOURCE=2'
+'CXXFLAGS=-g -O2 -fPIE -fstack-protector-strong -Wformat -Werror=format-security'
+
+alpine 
+Squid Cache: Version 3.5.19
+configure options:  
+'--build=x86_64-alpine-linux-musl'
+'--host=x86_64-alpine-linux-musl'
+'--prefix=/usr'
+'--datadir=/usr/share/squid'
+'--sysconfdir=/etc/squid'
+'--libexecdir=/usr/lib/squid'
+'--localstatedir=/var'
+'--with-logdir=/var/log/squid'
+'--disable-strict-error-checking'
+'--enable-removal-policies=lru,heap'
+'--enable-auth-digest'
+'--enable-auth-basic=getpwnam,NCSA,SMB,SMB_LM,RADIUS'
+'--enable-epoll'
+'--enable-external-acl-helpers=file_userip,unix_group,wbinfo_group'
+'--enable-auth-ntlm=fake,smb_lm'
+'--enable-auth-negotiate=kerberos,wrapper'
+'--disable-mit'
+'--enable-heimdal'
+'--enable-delay-pools'
+'--enable-openssl'
+'--enable-ssl-crtd'
+'--enable-linux-netfilter'
+'--enable-ident-lookups'
+'--enable-useragent-log'
+'--enable-cache-digests'
+'--enable-referer-log'
+'--enable-async-io'
+'--enable-truncate'
+'--enable-arp-acl'
+'--enable-htcp'
+'--enable-carp'
+'--enable-poll'
+'--enable-follow-x-forwarded-for'
+'--with-large-files'
+'--with-default-user=squid'
+'--with-openssl'
+'build_alias=x86_64-alpine-linux-musl'
+'host_alias=x86_64-
+alpine-linux-musl'
+'CC=gcc'
+'CFLAGS=-Os -fomit-frame-pointer'
+'LDFLAGS=-Wl,--as-needed'
+'CPPFLAGS=-Os -fomit-frame-pointer'
+'CXXFLAGS=-Os -fomit-frame-pointer'

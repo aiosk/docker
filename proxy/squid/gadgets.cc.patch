@@ -1,0 +1,13 @@
+diff --git a/src/ssl/gadgets.cc b/src/ssl/gadgets.cc
+index 9b552d7..8bfc52c 100644
+--- a/src/ssl/gadgets.cc
++++ b/src/ssl/gadgets.cc
+@@ -273,7 +273,7 @@ static int
+ mimicExtensions(Security::CertPointer & cert, Security::CertPointer const & mimicCert)
+ {
+     static int extensions[]= {
+-        NID_key_usage,
++        //NID_key_usage,
+         NID_ext_key_usage,
+         NID_basic_constraints,
+         0
