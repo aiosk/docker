@@ -1,0 +1,6 @@
+*/**/lib.sh
+*.tar.gz
+*.tgz
+proxy/privoxy/privoxy-blocklist.sh
+proxy/proxhttps/ProxHTTPSProxyMII.zip
+plex/plexmediaserver_1.0.2.2413-7caf41d_amd64.deb
