@@ -1,0 +1,18 @@
+FROM debian
+
+WORKDIR /root
+
+RUN set -ex \
+	&& buildDeps='' \
+	&& runDeps='aria2 bash sed' \
+	&& apt-get update && apt-get install -y --no-install-recommends --no-install-suggests $runDeps $buildDeps \
+	&& rm -rf /var/lib/apt/lists/* \
+
+	&& touch /var/log/aria2c \
+
+	&& apt-get purge -y --auto-remove $buildDeps \
+	&& apt-get clean -y && apt-get autoclean -y && apt-get autoremove -y \
+	&& rm -rf /var/cache/debconf/*-old /usr/share/doc/* /usr/share/man/* /usr/share/groff/* /usr/share/info/* /usr/share/locale/* /tmp/* /var/tmp/*
+
+COPY lib.sh ./lib.sh
+COPY init.sh ./aria2c.sh

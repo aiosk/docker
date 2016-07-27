@@ -1,0 +1,25 @@
+---
+services:
+  aria2c:
+    build: ./aria2c
+    env_file: ./Dockerenv
+    environment: 
+      - CONFIG=/root/.aria2/aria2.conf
+    ports:
+      - "6800:6800"
+    volumes:
+      - /mnt/media/data/downloads:/mnt/downloads
+    restart: unless-stopped
+    command: [bash, ./aria2c.sh]
+  webui:
+    build: ./webui-aria2
+    links:
+      - aria2c
+    env_file: ./Dockerenv
+    environment:
+      - DIR=/usr/share/nginx/webui-aria2
+    ports:
+      - "9000:80"
+    restart: unless-stopped
+    command: [bash, ./webui.sh]
+version: "2"
