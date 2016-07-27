@@ -1,0 +1,13 @@
+---
+services:
+  serviio:
+    build: .
+    network_mode: "host"
+    environment: 
+      - IPADDR=192.168.2.123
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /mnt/media/data:/mnt/media
+    restart: unless-stopped
+    command: [bash, ./serviio.sh]
+version: "2"
