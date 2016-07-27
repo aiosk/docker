@@ -1,0 +1,35 @@
+FROM debian:8
+
+# Install samba
+RUN set -ex \
+	&& buildDeps='' \
+	&& runDeps='samba bash sed' \
+	&& export DEBIAN_FRONTEND='noninteractive' \
+	&& apt-get update && apt-get install -y --no-install-recommends --no-install-suggests $runDeps \
+	&& rm -rf /var/lib/apt/lists/* \
+	
+	&& apt-get clean -y && apt-get autoclean -y && apt-get autoremove -y \
+	&& rm -rf /var/cache/debconf/*-old /usr/share/doc/* /usr/share/man/* /usr/share/groff/* /usr/share/info/* /usr/share/locale/* /tmp/* /var/tmp/*
+
+RUN	useradd smbuser -M \
+	&& sed -i 's|^\(   log file = \).*|\1/dev/stdout|' /etc/samba/smb.conf \
+	&& sed -i 's|^\(   unix password sync = \).*|\1no|' /etc/samba/smb.conf \
+	&& sed -i '/Share Definitions/,$d' /etc/samba/smb.conf \
+	&& echo '   security = user' >>/etc/samba/smb.conf \
+	&& echo '   directory mask = 0775' >>/etc/samba/smb.conf \
+	&& echo '   force create mode = 0664' >>/etc/samba/smb.conf \
+	&& echo '   force directory mode = 0775' >>/etc/samba/smb.conf \
+	&& echo '   force user = smbuser' >>/etc/samba/smb.conf \
+	&& echo '   force group = users' >>/etc/samba/smb.conf \
+	&& echo '   load printers = no' >>/etc/samba/smb.conf \
+	&& echo '   printing = bsd' >>/etc/samba/smb.conf \
+	&& echo '   printcap name = /dev/null' >>/etc/samba/smb.conf \
+	&& echo '   disable spoolss = yes' >>/etc/samba/smb.conf \
+	&& echo '' >>/etc/samba/smb.conf
+COPY samba.sh /usr/bin/
+
+VOLUME ["/etc/samba"]
+
+EXPOSE 137 139 445
+
+ENTRYPOINT ["samba.sh"]

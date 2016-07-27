@@ -1,0 +1,10 @@
+---
+services:
+  samba:
+    build: .
+    network_mode: "host"
+    volumes:
+      - /mnt/media/data:/mnt/shares:rw
+    restart: unless-stopped
+    command: [bash, ./samba.sh]
+version: "2"
