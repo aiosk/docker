@@ -4,10 +4,11 @@ services:
     build: .
     network_mode: "host"
     environment: 
-      - IPADDR=192.168.2.123
+      - IPADDR=192.168.1.2
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /mnt/media/data:/mnt/media
+      - /home/andry/serviio-library:/root/serviio-1.6.1/library
     restart: unless-stopped
     command: [bash, ./serviio.sh]
 version: "2"
