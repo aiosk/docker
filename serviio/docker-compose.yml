@@ -8,7 +8,8 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /mnt/media/data:/mnt/media
-      - /home/andry/serviio-library:/root/serviio-1.6.1/library
+      - /home/andry/serviio-library:/root/serviio-1.7/library
+      - /mnt/media/data/serviio-transcode:/mnt/transcode
     restart: unless-stopped
     command: [bash, ./serviio.sh]
 version: "2"

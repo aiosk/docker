@@ -1,8 +1,11 @@
 #!/bin/sh
 set -e
 
-if [ ! -f ./serviio-1.6.1-linux.tar.gz ]; then
-	curl -Lk -o ./serviio-1.6.1-linux.tar.gz http://download.serviio.org/releases/serviio-1.6.1-linux.tar.gz
+FILE=serviio-1.7-linux.tar.gz
+URL="http://download.serviio.org/releases/$FILE"
+
+if [ ! -f "./$FILE" ]; then
+	curl -Lk -o "$FILE" "$URL"
 fi
 
 ../replace-for-arm.sh \
