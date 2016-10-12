@@ -1,4 +1,4 @@
-FROM debian
+FROM armbuild/debian
 
 WORKDIR /root
 
@@ -45,10 +45,10 @@ RUN set -ex \
 		&& (( find /usr/share/doc -depth -type f ! -name copyright|xargs rm || true )) \
 		&& (( find /usr/share/doc -empty|xargs rmdir || true ))
 
-COPY serviio-1.6.1-linux.tar.gz /tmp/
+COPY serviio-1.7-linux.tar.gz /tmp/
 RUN set -ex \
-	&& tar -zxvf /tmp/serviio-1.6.1-linux.tar.gz \
-	&& chown root:root -R ./serviio-1.6.1 \
+	&& tar -zxvf /tmp/serviio-1.7-linux.tar.gz \
+	&& chown root:root -R ./serviio-1.7 \
 	&& rm /tmp/*
 
 COPY init.sh ./serviio.sh
