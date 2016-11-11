@@ -1,25 +1,25 @@
----
+version: '2'
 services:
-  aria2c:
-    build: ./aria2c
-    env_file: ./Dockerenv
-    environment: 
-      - CONFIG=/root/.aria2/aria2.conf
-    ports:
-      - "6800:6800"
-    volumes:
-      - /mnt/media/data/downloads:/mnt/downloads
-    restart: unless-stopped
-    command: [bash, ./aria2c.sh]
-  webui:
-    build: ./webui-aria2
-    links:
-      - aria2c
-    env_file: ./Dockerenv
-    environment:
-      - DIR=/usr/share/nginx/webui-aria2
-    ports:
-      - "9000:80"
-    restart: unless-stopped
-    command: [bash, ./webui.sh]
-version: "2"
+    aria2c:
+        build: 
+            context: ./aria2c
+            args:
+                - TOKEN=Ym6rrXw7ax01mdx60qEu82N9V35u41tC
+        expose:
+            - "6800"
+        network_mode: "host"
+        volumes:
+            - /d/Documents/Projects/docker2/aria2/downloads:/downloads
+        restart: unless-stopped
+        command: aria2c
+    webui:
+        image: busybox
+        environment:
+            - TOKEN=Ym6rrXw7ax01mdx60qEu82N9V35u41tC
+        volumes:
+            - /d/Documents/Projects/docker2/aria2/webui/webui-aria2-master:/usr/html
+        network_mode: "host"
+        ports:
+            - "9000:80"
+        restart: unless-stopped
+        command: /bin/busybox httpd -f -p 80 -h /usr/html

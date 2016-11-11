@@ -1,12 +1,11 @@
 FROM alpine
 
 WORKDIR /root
+ENV CONFIG=/root/.aria2/aria2.conf
+ARG TOKEN=undefined
 
+COPY aria2.conf "$CONFIG"
 RUN set -ex \
-	&& buildDeps='' \
-	&& runDeps='aria2 bash sed' \
-	&& apk add --no-cache $runDeps
-
-COPY lib.sh ./lib.sh
-COPY init.sh ./aria2c.sh
-COPY aria2.conf ./.aria2/aria2.conf
+	&& apk add --no-cache aria2 \
+	
+	&& echo "rpc-secret=$TOKEN" >> "$CONFIG"
