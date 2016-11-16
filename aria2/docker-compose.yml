@@ -1,25 +1,20 @@
 version: '2'
 services:
     aria2c:
-        build: 
-            context: ./aria2c
-            args:
-                - TOKEN=Ym6rrXw7ax01mdx60qEu82N9V35u41tC
+        build: ./aria2c
+        volumes:
+            - /d/Documents/Projects/docker/aria2/downloads:/downloads
+        network_mode: "host"
         expose:
             - "6800"
-        network_mode: "host"
-        volumes:
-            - /d/Documents/Projects/docker2/aria2/downloads:/downloads
         restart: unless-stopped
         command: aria2c
     webui:
         image: busybox
-        environment:
-            - TOKEN=Ym6rrXw7ax01mdx60qEu82N9V35u41tC
         volumes:
-            - /d/Documents/Projects/docker2/aria2/webui/webui-aria2-master:/usr/html
+            - /d/Documents/Projects/docker/aria2/webui/webui-aria2-master:/usr/html
         network_mode: "host"
-        ports:
-            - "9000:80"
+        expose:
+            - "9000"
         restart: unless-stopped
-        command: /bin/busybox httpd -f -p 80 -h /usr/html
+        command: /bin/busybox httpd -f -p 9000 -h /usr/html
