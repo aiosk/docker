@@ -4,7 +4,8 @@ services:
     build: .
     network_mode: "host"
     volumes:
-      - /mnt/media/data:/mnt/shares:rw
+      - /d/Documents/Projects/docker/samba/data:/shares:rw
     restart: unless-stopped
-    command: [bash, ./samba.sh]
+    stdin_open: true
+    command: sh -c "/usr/sbin/nmbd -FS -s ./smb.conf -d 1 & /usr/sbin/smbd -FSs ./smb.conf -d 2"
 version: "2"

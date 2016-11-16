@@ -23,10 +23,10 @@
 [global]
 
 # workgroup = NT-Domain-Name or Workgroup-Name, eg: MIDEARTH
-   workgroup = WORKGROUP
+workgroup = WORKGROUP
 
 # server string is the equivalent of the NT Description field
-   server string = Samba Server
+server string = Samba Server
 
 # Server role. Defines in which mode Samba will operate. Possible
 # values are "standalone server", "member server", "classic primary
@@ -37,7 +37,7 @@
 # Running as "active directory domain controller" will require first
 # running "samba-tool domain provision" to wipe databases and create a
 # new domain.
-   server role = standalone server
+server role = standalone server
 
 # This option is important for security. It allows you to restrict
 # connections to machines which are on your local network. The
@@ -54,10 +54,10 @@
 # this tells Samba to use a separate log file for each machine
 # that connects
 ;   log file = /usr/local/samba/var/log.%m
-   log file = /dev/stdout
+log file = /dev/stdout
 
 # Put a capping on the size of the log files (in Kb).
-   max log size = 50
+max log size = 50
 
 # Specifies the Kerberos or Active Directory realm the host is part of
 ;   realm = MY_REALM
@@ -65,7 +65,7 @@
 # Backend to store user information in. New installations should 
 # use either tdbsam or ldapsam. smbpasswd is available for backwards 
 # compatibility. tdbsam requires no further configuration.
-   passdb backend = tdbsam
+passdb backend = tdbsam
 
 # Using the following line enables you to customise your configuration
 # on a per machine basis. The %m gets replaced with the netbios name
@@ -78,7 +78,7 @@
 # If you have multiple network interfaces then you must list them
 # here. See the man page for details.
 ;   interfaces = 192.168.12.2/24 192.168.13.2/24 
-interfaces = 192.168.1.2/28
+;interfaces = 192.168.1.2/28
 
 # Where to store roving profiles (only for Win95 and WinNT)
 #        %L substitutes for this servers netbios name, %U is username
@@ -100,7 +100,7 @@ interfaces = 192.168.1.2/28
 
 # DNS Proxy - tells Samba whether or not to try to resolve NetBIOS names
 # via DNS nslookups. The default is NO.
-   dns proxy = no 
+dns proxy = no 
 
 # These scripts are used on a domain controller or stand-alone 
 # machine to add or delete corresponding unix accounts
@@ -229,7 +229,7 @@ disable spoolss = yes
 
 # aios
 [Videos]
-   path = /mnt/shares/Videos
+   path = /shares/Videos
 
    browseable = yes
 
@@ -240,7 +240,7 @@ disable spoolss = yes
 ;   write list = @andry
 
 [data]
-   path = /mnt/shares
+   path = /shares
    
    valid users = andry
    guest ok = no
