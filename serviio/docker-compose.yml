@@ -3,13 +3,10 @@ services:
   serviio:
     build: .
     network_mode: "host"
-    environment: 
-      - IPADDR=192.168.1.2
     volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /mnt/media/data:/mnt/media
-      - /home/andry/serviio-library:/root/serviio-1.7/library
-      - /mnt/media/data/serviio-transcode:/mnt/transcode
+      - /d/Documents/Projects/docker/serviio/data:/mnt/media
+      - /d/Documents/Projects/docker/serviio/serviio-1.7.1.1:/root/serviio-1.7.1.1
+      - /d/Documents/Projects/docker/serviio/library:/root/serviio-1.7.1.1/library
     restart: unless-stopped
-    command: [bash, ./serviio.sh]
+    command: sh -c "/root/serviio-1.7.1.1/bin/serviio.sh & /root/serviio-1.7.1.1/bin/serviio-console.sh & tail -f /dev/null"
 version: "2"
