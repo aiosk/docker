@@ -20,6 +20,5 @@
 [data]
 	path = /shares
 	valid users = andry
-	force user = andry
-	force group = share
-	read only = No
+	admin users = andry
+	read only = no
