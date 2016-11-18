@@ -8,3 +8,7 @@ aria2/downloads
 
 serviio/serviio-*
 serviio/library
+
+owncloud/apps
+owncloud/data
+owncloud/config

@@ -1,0 +1,12 @@
+---
+services:
+  owncloud:
+    build: .
+    volumes:
+      - /d/Documents/Projects/docker/owncloud/apps:/var/www/html/apps
+      - /d/Documents/Projects/docker/owncloud/config:/var/www/html/config
+      - /d/Documents/Projects/docker/owncloud/data:/var/www/html/data:rw
+    ports:
+     - 9010:80
+    restart: unless-stopped
+version: "2"
