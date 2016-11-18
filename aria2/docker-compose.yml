@@ -3,14 +3,14 @@ services:
     aria2c:
         build: ./aria2c
         volumes:
-            - /d/Documents/Projects/docker/aria2/downloads:/downloads
+            - /mnt/data/downloads:/downloads:rw
         network_mode: "host"
         restart: unless-stopped
         command: aria2c
     webui:
-        image: busybox
+        image: armbuild/busybox
         volumes:
-            - /d/Documents/Projects/docker/aria2/webui/webui-aria2-master:/usr/html
+            - ./webui/webui-aria2-master:/usr/html
         network_mode: "host"
         restart: unless-stopped
         command: /bin/busybox httpd -f -p 9000 -h /usr/html
