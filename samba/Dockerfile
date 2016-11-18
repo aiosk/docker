@@ -20,8 +20,6 @@ RUN	set -ex \
 
 COPY smb.conf.default /etc/samba/smb.conf
 RUN	set -ex \
-	&& touch /var/lib/samba/registry.tdb \
-	&& touch /var/lib/samba/winbindd_idmap.tdb \
-	&& touch /var/lib/samba/account_policy.tdb \
+	&& touch /etc/printcap \
 
-	&& echo 'yosuasamba' | tee - | $(which smbpasswd) -D 3 -a andry
+	&& echo 'yosuasamba' | tee - | $(which smbpasswd) -a andry
