@@ -4,9 +4,10 @@ services:
     build: .
     network_mode: "host"
     volumes:
-      - /d/Documents/Projects/docker/serviio/data:/mnt/media
-      - /d/Documents/Projects/docker/serviio/serviio-1.7.1.1:/root/serviio-1.7.1.1
-      - /d/Documents/Projects/docker/serviio/library:/root/serviio-1.7.1.1/library
+      - /mnt/data:/mnt/media
+      - ./serviio-1.7.1.1:/root/serviio-1.7.1.1
+      - ./library:/root/serviio-1.7.1.1/library
     restart: unless-stopped
-    command: sh -c "/root/serviio-1.7.1.1/bin/serviio.sh & /root/serviio-1.7.1.1/bin/serviio-console.sh & tail -f /dev/null"
+    entrypoint: bash
+    command: -c "/root/serviio-1.7.1.1/bin/serviio.sh & /root/serviio-1.7.1.1/bin/serviio.sh"
 version: "2"
