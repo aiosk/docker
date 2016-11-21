@@ -1,17 +1,24 @@
 [global]
-	interfaces = 192.168.99.100/24
+	interfaces = 192.168.1.2/28
 	bind interfaces only = Yes
+	security = SHARE
 	map to guest = Bad User
 	log file = /dev/stdout
 	load printers = No
+	printcap name = /etc/printcap
+	printing = bsd
 
 [Videos]
 	path = /shares/Videos
 	guest ok = Yes
 
+[Nono]
+	path = /shares/NewFolder
+	guest ok = Yes
+	hosts allow = 192.168.1.1/255.255.255.248
+
 [data]
 	path = /shares
 	valid users = andry
-	force user = andry
-	force group = share
-	read only = No
+	admin users = andry
+	read only = no
