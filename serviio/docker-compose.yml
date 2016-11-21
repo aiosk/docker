@@ -8,5 +8,6 @@ services:
       - /d/Documents/Projects/docker/serviio/serviio-1.7.1.1:/root/serviio-1.7.1.1
       - /d/Documents/Projects/docker/serviio/library:/root/serviio-1.7.1.1/library
     restart: unless-stopped
-    command: sh -c "/root/serviio-1.7.1.1/bin/serviio.sh & /root/serviio-1.7.1.1/bin/serviio-console.sh & tail -f /dev/null"
+    entrypoint: sh
+    command: -c "sh /root/serviio-1.7.1.1/bin/serviio.sh & sh /root/serviio-1.7.1.1/bin/serviio-console.sh & tail -f /dev/null"
 version: "2"
