@@ -8,6 +8,7 @@ services:
       - ./serviio-1.7.1.1:/root/serviio-1.7.1.1
       - ./library:/root/serviio-1.7.1.1/library
     restart: unless-stopped
-    entrypoint: bash
+
+    entrypoint: sh
     command: -c "/root/serviio-1.7.1.1/bin/serviio.sh & /root/serviio-1.7.1.1/bin/serviio.sh"
 version: "2"
