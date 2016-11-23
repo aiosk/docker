@@ -19,7 +19,7 @@
 # limitations under the License.
 #
 
-FROM alpine:3.4
+FROM armbuild/alpine
 
 MAINTAINER Dinakar Guniguntala <dinakar.g@in.ibm.com> (@dinogun)
 
@@ -87,7 +87,7 @@ ENV         FFMPEG_VERSION=3.2 \
             PKG_CONFIG_PATH=/usr/local/lib/pkgconfig \
             SRC=/usr/local
 
-RUN     buildDeps="autoconf \
+RUN     set -x && buildDeps="autoconf \
                    automake \
                    bash \
                    binutils \
@@ -113,14 +113,6 @@ RUN     buildDeps="autoconf \
         ./configure --prefix="${SRC}" --bindir="${SRC}/bin" --enable-pic --enable-shared --disable-cli && \
         make && \
         make install && \
-        rm -rf ${DIR} && \
-        DIR=$(mktemp -d) && cd ${DIR} && \
-## x265 http://x265.org/
-        curl -sL https://download.videolan.org/pub/videolan/x265/x265_${X265_VERSION}.tar.gz  | \
-        tar -zx && \
-        cd x265_${X265_VERSION}/build/linux && \
-        ./multilib.sh && \
-        make -C 8bit install && \
         rm -rf ${DIR} && \
         DIR=$(mktemp -d) && cd ${DIR} && \
 ## libogg https://www.xiph.org/ogg/
@@ -183,16 +175,6 @@ RUN     buildDeps="autoconf \
         make install && \
         rm -rf ${DIR} && \
         DIR=$(mktemp -d) && cd ${DIR} && \
-## fdk-aac https://github.com/mstorsjo/fdk-aac
-        curl -sL https://github.com/mstorsjo/fdk-aac/archive/v${FDKAAC_VERSION}.tar.gz | \
-        tar -zx --strip-components=1 && \
-        autoreconf -fiv && \
-        ./configure --prefix="${SRC}" --disable-static --datadir="${DIR}" && \
-        make && \
-        make install && \
-        make distclean && \
-        rm -rf ${DIR} && \
-        DIR=$(mktemp -d) && cd ${DIR} && \
 ## ffmpeg https://ffmpeg.org/
         curl -sL http://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.gz | \
         tar -zx --strip-components=1 && \
@@ -206,14 +188,12 @@ RUN     buildDeps="autoconf \
 	--disable-ffplay \
         --extra-libs=-ldl \
         --enable-version3 \
-        --enable-libfdk_aac \
         --enable-libmp3lame \
         --enable-libopus \
         --enable-libtheora \
         --enable-libvorbis \
         --enable-libvpx \
         --enable-libx264 \
-        --enable-libx265 \
         --enable-libxvid \
 	--enable-gpl \
         --enable-avresample \
