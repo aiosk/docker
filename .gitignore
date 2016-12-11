@@ -1,6 +1,7 @@
 */**/lib.sh
 *.tar.gz
 *.tgz
+*.log
 
 aria2/webui/webui-aria2-master
 aria2/webui/*.zip
