@@ -20,12 +20,12 @@ angular
 
   torrent: true,  // bittorrent support only enabled if supported by aria2 build, set to false otherwise to permanently disable it
 
-  metalink: true, // metalink support only enabled if supported by aria2 build, set to false to permanently disable it
+  metalink: false, // metalink support only enabled if supported by aria2 build, set to false to permanently disable it
 
   sidebar: {            // configuration related to the sidebar next to the list of downloads
     show: true,         // set to false to completely hide the sidebar. Other elements inside will be automatically hidden
 
-    stats: true,        // set to false to hide the global statistic section (contains the speed graph for now)
+    stats: false,        // set to false to hide the global statistic section (contains the speed graph for now)
 
     filters: true,      // set to false to hide the  Download Filters
 
@@ -38,9 +38,9 @@ angular
 ])
 .constant('$downloadProps', [ // Similar to starred Quick Access properties but for adding new downloads.
   // go to Advance Download Options when adding a new download to view the list of possible options
-  'http-user', 'http-passwd', 'pause', 'dir', 'max-connection-per-server'
+  'pause', 'all-proxy', 'http-user', 'http-passwd', 'dir', 'max-connection-per-server'
 ])
-.constant('$globalTimeout', 1000)  // interval to update the individual downloads
+.constant('$globalTimeout', 2000)  // interval to update the individual downloads
 ;
 
 
