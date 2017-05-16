@@ -1,25 +1,20 @@
-FROM armbuild/debian:7
-
-WORKDIR /root
+FROM armhf/debian:wheezy-slim
 
 RUN set -ex \
 	&& export DEBIAN_FRONTEND='noninteractive' \
-	&& apt-get update && apt-get install -y --no-install-recommends --no-install-suggests samba-common-bin swat  \
-	&& rm -rf /var/lib/apt/lists/* \
+	&& apt-get update && apt-get install -y --no-install-recommends --no-install-suggests \
+		samba-common-bin swat
 
-	&& apt-get clean -y && apt-get autoclean -y && apt-get autoremove -y \
-	&& rm -rf /var/cache/debconf/*-old /usr/share/doc/* /usr/share/man/* /usr/share/groff/* /usr/share/info/* /usr/share/locale/* /tmp/* /var/tmp/*
-	
-RUN	set -ex \
-	&& addgroup --system share \
-	&& adduser --system --ingroup share andry && echo 'yosua' | passwd -d andry \
+COPY smb.conf /tmp/
 
-	&& echo "root:yosuasamba" | chpasswd \
+ARG USER
+ARG PASS
 
-	&& cp /etc/samba/smb.conf /etc/samba/smb.conf.ori
-
-COPY smb.conf.default /etc/samba/smb.conf
-RUN	set -ex \
+RUN set -ex \
+	&& cp /etc/samba/smb.conf /etc/samba/smb.ori.conf \
+	&& cp /tmp/smb.conf /etc/samba/smb.conf \
 	&& touch /etc/printcap \
 
-	&& echo 'yosuasamba' | tee - | $(which smbpasswd) -a andry
+	&& adduser --system --no-create-home --uid 1000 --group "$USER" \
+	&& printf "$PASS\n$PASS\n" | $(which smbpasswd) -a "$USER" \
+	&& printf "root:$PASS\nandry:$PASS\n" | chpasswd
