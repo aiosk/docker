@@ -16,5 +16,7 @@ RUN set -ex \
 	&& touch /etc/printcap \
 
 	&& adduser --system --no-create-home --uid 1000 --group "$USER" \
+	&& groupadd datayosua \
+	&& gpasswd -a andry datayosua \
 	&& printf "$PASS\n$PASS\n" | $(which smbpasswd) -a "$USER" \
 	&& printf "root:$PASS\nandry:$PASS\n" | chpasswd

@@ -7,7 +7,7 @@ docker rm --force "$NAME"
 docker run \
 	--detach \
 	--net=host \
-	--restart=on-failure:3 \
+	--restart=unless-stopped \
 	--name="$NAME" \
 	--volume=/mnt/data:/shares:rw \
 	aios/samba \
