@@ -8,6 +8,9 @@ if [ ! -f "./webui/$FILE" ]; then
 fi
 if [ ! -d "./webui/webui-aria2-master" ]; then
 	unzip "./webui/$FILE" -d "./webui"
-	cp ./webui/configuration.js ./webui/webui-aria2-master/configuration.js 
+	cp ./webui/webui-aria2-master/configuration.js ./webui/webui-aria2-master/configuration.old.js
+	cp ./webui/configuration.js ./webui/webui-aria2-master/configuration.js
 fi
+
 docker-compose build
+

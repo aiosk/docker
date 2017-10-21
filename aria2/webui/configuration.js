@@ -9,7 +9,7 @@ angular
   port: 6800,
   encrypt: false,
   auth: {                          // either add the token field or the user and pass field, not both.
-   token: 'Ym6rrXw7ax01mdx60qEu82N9V35u41tC'
+  token: 'Ym6rrXw7ax01mdx60qEu82N9V35u41tC'
   /*-----------------------------*/
   // user: '*YOUR_USERNAME*',
   // pass: '*YOUR_SECRET_PASS*'
@@ -34,11 +34,12 @@ angular
 })
 .constant('$starredProps', [   // default list of Quick Access Properties. Can be overridden by making modification through the Global Settings dialog
   // go to Global Settings dialog to see their description
-  'max-overall-upload-limit', 'max-concurrent-downloads', 'max-connection-per-server'
+  // 'dir', 'conf-path', 'auto-file-renaming', 'max-connection-per-server'
+  'all-proxy', 'max-concurrent-downloads' 
 ])
 .constant('$downloadProps', [ // Similar to starred Quick Access properties but for adding new downloads.
   // go to Advance Download Options when adding a new download to view the list of possible options
-  'pause', 'all-proxy', 'http-user', 'http-passwd', 'dir', 'max-connection-per-server'
+  'header', 'http-user', 'http-passwd', 'pause', 'dir', 'max-connection-per-server'
 ])
 .constant('$globalTimeout', 2000)  // interval to update the individual downloads
 ;
