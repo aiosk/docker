@@ -10,6 +10,7 @@ docker run \
 	--restart=unless-stopped \
 	--name="$NAME" \
 	--volume=/mnt/data:/shares:rw \
+	--volume=/mnt/data2:/shares2:rw \
 	aios/samba \
 	sh -c "inetd -d & /usr/sbin/nmbd -FS & /usr/sbin/smbd -FS"
 
