@@ -11,10 +11,8 @@ docker run \
 	--net host \
 	--restart=unless-stopped \
 	--name="$NAME" \
-	--env NFS_DISABLE_VERSION_3=1 \
-	--env NFS_EXPORT_1='/nfs/data2 *(rw,no_subtree_check)' \
-	--volume=/mnt/data:/nfs/data \
-	--volume=/mnt/data2:/nfs/data2 \
+	--env SHARED_DIRECTORY=/nfsshare \
+	--volume=/mnt:/nfsshare \
 	aios/nfs
 
 docker logs --follow --tail 20 --timestamps "$NAME"
