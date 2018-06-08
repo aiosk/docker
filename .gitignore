@@ -13,3 +13,5 @@ serviio/log
 owncloud/apps
 owncloud/data
 owncloud/config
+
+plex/config
