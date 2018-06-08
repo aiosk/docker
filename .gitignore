@@ -10,8 +10,10 @@ serviio/serviio-*
 serviio/library
 serviio/log
 
-owncloud/apps
-owncloud/data
-owncloud/config
+nextcloud/data
+nextcloud/config
+
+heimdall/config
+mariadb/config
 
 plex/config

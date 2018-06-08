@@ -1,0 +1,21 @@
+version: "2"
+services:
+  mariadb:
+    image: lsioarmhf/mariadb
+    restart: unless-stopped
+    ports:
+      - 3306:3306
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - MYSQL_ROOT_PASSWORD=yosuamariadb
+      - TZ=Asia/Jakarta
+    volumes:
+      - /home/andry/docker/mariadb/config:/config
+  adminer:
+    image: adminer
+    restart: unless-stopped
+    links:
+      - mariadb:db
+    ports:
+      - 8080:8080
