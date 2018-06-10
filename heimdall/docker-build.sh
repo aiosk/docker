@@ -3,6 +3,7 @@ docker rm heimdall
 
 docker create \
   --name=heimdall \
+  --restart=unless-stopped \
   -v /home/andry/docker/heimdall/config:/config \
   -e PGID=1000 -e PUID=1000  \
   -p 80:80 \
