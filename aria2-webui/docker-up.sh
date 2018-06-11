@@ -9,7 +9,7 @@ docker run -d \
   -p 6888:8080 \
   -v /mnt/data/downloads:/data \
   -v /home/andry/docker/aria2-webui/config:/conf \
-  -e SECRET=YOUR_SECRET_CODE \
+  -e SECRET=Ym6rrXw7ax01mdx60qEu82N9V35u41tC \
   xujinkai/aria2-with-webui
 
 docker logs --follow --tail 20 --timestamps aria2-with-webui

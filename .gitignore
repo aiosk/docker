@@ -12,3 +12,6 @@ heimdall/config
 mariadb/config
 plex/config
 redis/data
+portainer/data
+smokeping/data
+smokeping/config
