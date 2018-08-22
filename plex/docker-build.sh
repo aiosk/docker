@@ -1,12 +1,16 @@
-docker stop plex
-docker rm plex
+set -x
+
+NAME=plex
+
+docker stop "$NAME"
+docker rm "$NAME"
 
 docker create \
-    --name=plex \
+    --name="$NAME" \
     --net=host \
     --restart=unless-stopped \
     -e PUID=1000 -e PGID=1000 \
-    -v /home/andry/docker/plex/config:/config \
+    -v $PWD/config:/config \
     -v /mnt:/data/tvshows \
     -v /mnt:/data/movies \
     -v /mnt/data2/.transcode:/transcode \
