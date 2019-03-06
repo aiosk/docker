@@ -9,7 +9,7 @@ docker create \
   --name="$NAME" \
   --restart=unless-stopped \
   -v $PWD/config:/config \
-  -e PGID=1000 -e PUID=1000  \
+  -e PGID=996 -e PUID=1000  \
   -p 80:80 \
   -e TZ=Asia/Jakarta \
   lsioarmhf/heimdall

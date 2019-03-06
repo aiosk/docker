@@ -9,8 +9,10 @@ docker create \
   -v /mnt/data2/PDFs:/books2 \
   -v /mnt/data/NewFolder/Comics:/comics \
   -v /mnt/data/NewFolder/Comics:/files \
-  -e PGID=1000 -e PUID=1000  \
+  -e PGID=996 -e PUID=1000  \
   -p 2202:2202 \
   -p 2203:2203 \
   lsioarmhf/ubooquity
 
+docker start ubooquity
+docker logs --follow --tail 20 --timestamps ubooquity
