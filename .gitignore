@@ -1,17 +1,10 @@
 */**/lib.sh
 *.tar.gz
 *.tgz
+*.zip
+
+*/data
+*/config
 
 aria2/webui/webui-aria2-master
-aria2/webui/*.zip
 aria2/downloads
-aria2-webui/config
-nextcloud/data
-nextcloud/config
-heimdall/config
-mariadb/config
-plex/config
-redis/data
-portainer/data
-smokeping/data
-smokeping/config

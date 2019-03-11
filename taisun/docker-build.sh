@@ -1,6 +1,6 @@
 set -x
 
-NAME=heimdall
+NAME=taisun
 
 docker stop "$NAME"
 docker rm "$NAME"
@@ -8,11 +8,10 @@ docker rm "$NAME"
 docker create \
   --name="$NAME" \
   --restart=unless-stopped \
-  -v $PWD/config:/config \
-  -e PGID=996 -e PUID=1000  \
-  -p 80:80 \
-  -e TZ=Asia/Jakarta \
-  linuxserver/heimdall
+  -p 3000:3000 \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  linuxserver/taisun
 
 docker start "$NAME"
 docker logs --follow --tail 20 --timestamps "$NAME"
+
