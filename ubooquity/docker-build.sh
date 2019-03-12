@@ -10,7 +10,7 @@ docker create \
   --restart=unless-stopped \
   -e PGID=996 -e PUID=1000 \
   -e TZ=Asia/Jakarta \
-  -e MAXMEM=640 \
+  -e MAXMEM=256 \
   -p 2202:2202 \
   -p 2203:2203 \
   -v $PWD/config:/config \
