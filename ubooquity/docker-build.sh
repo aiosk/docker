@@ -14,12 +14,12 @@ docker create \
   -p 2202:2202 \
   -p 2203:2203 \
   -v $PWD/config:/config \
-  -v /mnt/data2/Books:/books/epub \
-  -v /mnt/data2/PDFs:/books/pdf \
   -v /mnt/data/.prn/Comics:/comics \
   linuxserver/ubooquity
 
+#  -v /mnt/data2/Books:/books \
 #  -v /mnt/data/.prn/Comics:/files \
+#  -v /mnt/data2/PDFs:/books/pdf \
 
 docker start "$NAME"
 docker logs --follow --tail 20 --timestamps "$NAME"
