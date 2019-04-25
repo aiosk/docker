@@ -1,5 +1,6 @@
 */**/lib.sh
 *.tar.gz
+*.sql
 *.tgz
 *.zip
 
