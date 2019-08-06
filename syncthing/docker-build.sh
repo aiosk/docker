@@ -15,10 +15,10 @@ docker create \
   -p 21027:21027/udp \
   -v $PWD/config:/config \
   -v /mnt/data/downloads/sync-device:/data1 \
+  -v /mnt/data2/syncthing:/data2 \
   --restart unless-stopped \
   linuxserver/syncthing
 
-#  -v </path/to/data2>:/data2 \
 #  -v /mnt/data/Pictures:/data/photos/1 \
 
 docker start "$NAME"
