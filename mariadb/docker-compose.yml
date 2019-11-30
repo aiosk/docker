@@ -4,12 +4,12 @@ services:
     image: linuxserver/mariadb
     container_name: mariadb
     environment:
-      - PUID=1000
-      - PGID=996
+      - PUID
+      - PGID
+      - TZ
       - MYSQL_ROOT_PASSWORD=yosuadb
-      - TZ=Europe/London
     volumes:
-      - $PWD/config:/config
+      - ~/.config/docker-mariadb/config:/config
     ports:
       - 3306:3306
     restart: unless-stopped

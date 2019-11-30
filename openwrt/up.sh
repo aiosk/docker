@@ -6,10 +6,10 @@ docker stop "$NAME"
 docker rm "$NAME"
 
 docker create \
-  --restart=unless-stopped \
   --name "$NAME" \
   --net host \
   --cap-add NET_ADMIN \
+  --restart=unless-stopped \
   nmaas87/rpi-openwrt:12.09_rpi \
   /sbin/init
 

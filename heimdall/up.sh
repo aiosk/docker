@@ -7,13 +7,12 @@ docker rm "$NAME"
 
 docker create \
   --name="$NAME" \
+  --env-file $PWD/.env \
+  --publish 84:80 \
+  --publish 85:443 \
+  --volume ~/.config/docker-$NAME/config:/config \
   --restart=unless-stopped \
-  -v $PWD/config:/config \
-  -e PGID=996 -e PUID=1000  \
-  -p 84:80 \
-  -e TZ=Asia/Jakarta \
   linuxserver/heimdall
 
-#  -p 443:443 \
 docker start "$NAME"
 docker logs --follow --tail 20 --timestamps "$NAME"
