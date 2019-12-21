@@ -6,12 +6,12 @@ docker stop "$NAME"
 docker rm "$NAME"
 
 docker create \
-  --name="$NAME" \
   --env-file $PWD/.env \
+  --name="$NAME" \
   --publish 84:80 \
   --publish 85:443 \
-  --volume ~/.config/docker-$NAME/config:/config \
   --restart=unless-stopped \
+  --volume ~/.config/docker-$NAME/config:/config \
   linuxserver/heimdall
 
 docker start "$NAME"

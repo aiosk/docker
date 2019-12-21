@@ -6,12 +6,12 @@ docker stop "$NAME"
 docker rm "$NAME"
 
 docker create \
-  --name="$NAME" \
   --env-file $PWD/.env \
+  --name="$NAME" \
   --publish 8083:8083 \
+  --restart unless-stopped \
   --volume ~/.config/docker-$NAME/config:/config \
   --volume /mnt/data2/Books:/books \
-  --restart unless-stopped \
   linuxserver/calibre-web
 
 docker start "$NAME"
