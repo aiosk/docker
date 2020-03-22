@@ -6,10 +6,7 @@ docker stop "$NAME"
 docker rm "$NAME"
 
 docker create \
-  --env ARIA2_PWD=yosuaaria2 \
-  --env ARIA2_USER=andry \
   --env ENABLE_AUTH=true \
-  --env RPC_SECRET=yosuaaria2 \
   --env-file $PWD/.env \
   --name="$NAME" \
   --publish 6800:6800 \
