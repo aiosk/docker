@@ -1,3 +1,5 @@
+#!/bin/sh
+
 set -x
 
 NAME=calibre-web
@@ -16,4 +18,4 @@ docker create \
   linuxserver/calibre-web
 
 docker start "$NAME"
-docker logs --follow --tail 20 --timestamps "$NAME"
+docker logs --follow --tail 99 "$NAME"

@@ -1,3 +1,5 @@
+#!/bin/sh
+
 set -x
 
 NAME=plex
@@ -11,7 +13,7 @@ docker create \
     --device=/dev/dri:/dev/dri \
     --name="$NAME" \
     --net=host \
-    --volume ~/.config/docker-$NAME/config:/config \
+    --volume ~/.config/docker-$NAME:/config \
     --volume /mnt/data/Videos/Movies:/data/movies/1 \
     --volume /mnt/data2/Videos/Movies:/data/movies/2 \
     --volume /mnt/data2/Videos/Series:/data/tvshows \
@@ -29,11 +31,6 @@ docker create \
     # -p 32469:32469/udp \
     # -p 5353:5353/udp \
     # -p 1900:1900/udp
-#    --volume /mnt/data/.prn/vids:/data/nfk/videos/prn \
-#    --volume /mnt/data/.prn/disturb/vids:/data/nfk/videos/disturb \
-#    --volume /mnt/data/.prn/disturb/pics:/data/nfk/photos/disturb \
-#    --volume /mnt/data/.prn/others:/data/nfk/photos/prn/others \
-#    --volume /mnt/data/.prn/pics:/data/nfk/photos/prn/pics \
 
 docker start "$NAME"
-docker logs --follow --tail 20 --timestamps "$NAME"
+docker logs --follow --tail 99 "$NAME"

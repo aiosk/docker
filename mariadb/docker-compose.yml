@@ -9,7 +9,7 @@ services:
       - TZ
       - MYSQL_ROOT_PASSWORD=yosuadb
     volumes:
-      - ~/.config/docker-mariadb/config:/config
+      - ~/.config/docker-mariadb:/config
     ports:
       - 3306:3306
     restart: unless-stopped
